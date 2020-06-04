@@ -1,0 +1,39 @@
+#wrapper {
+    margin: auto;
+    height: auto;
+    bottom:10px;
+}
+
+
+#header h1 {
+    font-size: 55px;
+    line-height: 64px;
+    text-align: center;
+    color: #000000;
+}
+
+#form_box {
+    border: 3px solid #000000;
+    border-radius: 10px;
+}
+
+#form_box p {
+    padding-left: 30px;
+    line-height: 26px;
+    color: #000000;
+}
+
+#form_box form {
+    padding-left: 30px;
+    line-height: 26px;
+    color: #000000;
+}
+
+#form_box button {
+    margin-left: 30px;
+}
+
+
+#bridge {
+    border: 2px solid black;
+}
