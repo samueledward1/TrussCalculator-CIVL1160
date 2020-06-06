@@ -130,9 +130,17 @@ $(document).ready(function () {
   $("#jointNum").change(function () {
     if ($("#jointNum").val() < 3) {
       $("#jointNum").val(3);
+      $("#jointNum").css("background-color", "#a53860");
+      $("#jointNum").css("color", "#f1f1f1").delay(700).queue(function(next){
+        $(this).css("background-color", "#E7E6DC").css("color", "grey");
+      });
     }
     if ($("#jointNum").val() > 26) {
       $("#jointNum").val(26);
+      $("#jointNum").css("background-color", "#a53860");
+      $("#jointNum").css("color", "#f1f1f1").delay(700).queue(function(next){
+        $(this).css("background-color", "#E7E6DC").css("color", "grey");
+      });
     }
   });
 
@@ -140,7 +148,9 @@ $(document).ready(function () {
     if ($("#length").val() < 0.01) {
       $("#length").val(0.01);
       $("#length").css("background-color", "#a53860");
-      // $("#length").css("color", "#f1f1f1").delay(1000).queue(function(next){});css("background-color", "#E7E6DC").css("color", "grey");;
+      $("#length").css("color", "#f1f1f1").delay(700).queue(function(next){
+        $(this).css("background-color", "#E7E6DC").css("color", "grey");
+      });
     }
   });
 
@@ -148,10 +158,9 @@ $(document).ready(function () {
     if ($("#height").val() < 0.01) {
       $("#height").val(0.01);
       $("#height").css("background-color", "#a53860");
-      $("#height").css("color", "#f1f1f1");
-    } else {
-      $("#height").css("background-color", "#E7E6DC");
-      $("#height").css("color", "grey");
+      $("#height").css("color", "#f1f1f1").delay(700).queue(function(next){
+        $(this).css("background-color", "#E7E6DC").css("color", "grey");
+      });
     }
   });
 
@@ -170,7 +179,6 @@ $(document).ready(function () {
       }
     }
 
-    console.log("test");
     analyze();
     draw();
   });
