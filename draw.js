@@ -8,17 +8,18 @@ function getCoord(objectSet, index) {
 
 function draw() {
   $("#bridge").html(""); //ngosongin #bridge
+  
   //gambar bridge
-  console.log(joints / 2);
+  // console.log(joints / 2);
   var bridgeWidth = $("#bridge").width();
   var lengthBar = (bridgeWidth) / (Math.floor(joints / 2) + 1);
   var heightBridge = height / length * lengthBar;
   $("#bridge svg").remove(); //remove paper
-  console.log("height" + heightBridge + "length" + lengthBar);
+  // console.log("height" + heightBridge + "length" + lengthBar);
   var paper = Raphael("bridge"); //create paper
 
   //auto resizze
-  paper.setViewBox(0, 0, $("#bridge").width(), heightBridge * 1.7, true);
+  paper.setViewBox(0, 0, $("#bridge").width(), 650, true);
   var svg = document.querySelector("svg");
   svg.removeAttribute("width");
   svg.removeAttribute("height");
@@ -43,11 +44,11 @@ function draw() {
       xCoordUp = xCoordDown + lengthBar / 2
     }
     if (i % 2) {
-      console.log("tingginya " + paper.height);
-      jointz.push(paper.circle(xCoordUp + (lengthBar * Math.floor(i / 2)), heightBridge / 4, 10));
+      // console.log("tingginya " + paper.height);
+      jointz.push(paper.circle(xCoordUp + (lengthBar * Math.floor(i / 2)), 120, 10));
     }
     else {
-      jointz.push(paper.circle(xCoordDown + (lengthBar * Math.ceil(i / 2)), heightBridge / 4 + heightBridge, 10));
+      jointz.push(paper.circle(xCoordDown + (lengthBar * Math.ceil(i / 2)), 530, 10));
     }
   }
 
@@ -79,9 +80,10 @@ function draw() {
     textz.push(paper.text((getCoord(jointz, i).x + getCoord(jointz, i + 1).x) / 2 - 20, (getCoord(jointz, i).y + getCoord(jointz, i + 1).y) / 2 - 5, counter));
     counter++;
     if (i < jointz.length - 2) {
-      textz.push(paper.text((getCoord(jointz, i).x + getCoord(jointz, i + 2).x) / 2, (getCoord(jointz, i).y - 20 + getCoord(jointz, i + 2).y) / 2 - 5, counter));
+      textz.push(paper.text((getCoord(jointz, i).x + getCoord(jointz, i + 2).x) / 2,  (!(counter%4)) ? getCoord(jointz,i).y + 20 :(getCoord(jointz, i).y - 20 + getCoord(jointz, i + 2).y) / 2 - 5, counter));
       counter++;
     }
+    
   }
   textz.attr({ "font-size": 14, "fill": "BLACK", "font-weight": "bold" });
 
@@ -120,28 +122,29 @@ function draw() {
   var arrowz = paper.set();
   for (i = 1; i < jointz.length; i++) {
     var end = joints % 2 ? joints : joints - 1;
-    textz.push(paper.text(getCoord(jointz, i).x - 20, i % 2 ? getCoord(jointz, i).y - 20 : getCoord(jointz, i).y + 20, String.fromCharCode(65 + i))); //draw joint name
+    textz.push(paper.text(i%2 ? getCoord(jointz,i).x + 30 : getCoord(jointz, i).x - 20, i % 2 ? getCoord(jointz, i).y - 20 : getCoord(jointz, i).y + 20, String.fromCharCode(65 + i))); //draw joint name
     if (i != end - 1) {
-      textz.push(paper.text(getCoord(jointz, i).x + 40, i % 2 ? getCoord(jointz, i).y - 20 : getCoord(jointz, i).y + 20, inputForce[i] + " kN")); // draw force value
+      textz.push(paper.text(i%2 ? getCoord(jointz,i).x - 40 : getCoord(jointz, i).x + 40 , i % 2 ? getCoord(jointz, i).y - 40 : getCoord(jointz, i).y + 40, inputForce[i] + " kN")); // draw force value
     }
     //draw joint arrows
+    var elongation = (inputForce[i] > 140 || inputForce[i] < -140) ? 140 : inputForce[i];
     if (i % 2) {
       if (inputForce[i] == 0) {
-        arrowz.push(paper.path("M" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 10) + "L" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y - 30 - Math.abs(inputForce[i] * 0.5))).attr({
+        arrowz.push(paper.path("M" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 10) + "L" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y - 50 - Math.abs(elongation* 0.5))).attr({
           stroke: 'grey',
           "stroke-width": 3,
           "arrow-end": "classic-long-wide"
         }));
       }
       else if (inputForce[i] > 0) {
-        arrowz.push(paper.path("M" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 10) + "L" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y - 30 - Math.abs(inputForce[i] * 0.5))).attr({
+        arrowz.push(paper.path("M" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 10) + "L" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y - 50 - Math.abs(elongation * 0.5))).attr({
           stroke: '#000',
           "stroke-width": 3,
           "arrow-end": "classic-long-wide"
         }));
       }
       else {
-        arrowz.push(paper.path("M" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y - 10) + "L" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y - 30 - Math.abs(inputForce[i] * 0.5))).attr({
+        arrowz.push(paper.path("M" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y - 10) + "L" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y - 50 - Math.abs(elongation * 0.5))).attr({
           stroke: '#000',
           "stroke-width": 3,
           "arrow-start": "classic-long-wide"
@@ -153,21 +156,21 @@ function draw() {
         continue;
       }
       if (inputForce[i] == 0) {
-        arrowz.push(paper.path("M" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 30 + Math.abs(inputForce[i] * 0.5)) + "L" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 10)).attr({
+        arrowz.push(paper.path("M" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 50 + Math.abs(elongation * 0.5)) + "L" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 10)).attr({
           stroke: 'grey',
           "stroke-width": 3,
           "arrow-start": "classic-long-wide"
         }));
       }
       else if (inputForce[i] < 0) {
-        arrowz.push(paper.path("M" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 30 + Math.abs(inputForce[i] * 0.5)) + "L" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 10)).attr({
+        arrowz.push(paper.path("M" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 50 + Math.abs(elongation * 0.5)) + "L" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 10)).attr({
           stroke: '#000',
           "stroke-width": 3,
           "arrow-start": "classic-long-wide"
         }));
       }
       else {
-        arrowz.push(paper.path("M" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 30 + Math.abs(inputForce[i] * 0.5)) + "L" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 10)).attr({
+        arrowz.push(paper.path("M" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 50 + Math.abs(elongation * 0.5)) + "L" + getCoord(jointz, i).x + " " + (getCoord(jointz, i).y + 10)).attr({
           stroke: '#000',
           "stroke-width": 3,
           "arrow-end": "classic-long-wide"
@@ -181,21 +184,15 @@ function draw() {
   //REDRAW JOINTZ
   for (var i = 0; i < joints; i++) {
     if (i % 2) {
-      console.log("tingginya " + paper.height);
-      jointz.push(paper.circle(xCoordUp + (lengthBar * Math.floor(i / 2)), heightBridge / 4, 10));
+      // console.log("tingginya " + paper.height);
+      jointz.push(paper.circle(xCoordUp + (lengthBar * Math.floor(i / 2)), 120, 10));
     }
     else {
-      jointz.push(paper.circle(xCoordDown + (lengthBar * Math.ceil(i / 2)), heightBridge / 4 + heightBridge, 10));
+      jointz.push(paper.circle(xCoordDown + (lengthBar * Math.ceil(i / 2)), 530, 10));
     }
   }
 
   jointz.attr({ "fill": '#9d6b53', "stroke": "none" });
-    
-  var legendz = paper.set();
-  legendz.push(paper.rect(160, heightBridge*1.5+5, 20,20).attr({"fill": "#a53860", "stroke": "none"}));
-  legendz.push(paper.text(275, heightBridge*1.5+15, "Bars in compression").attr({"font-size":20}));
-  legendz.push(paper.rect(450, heightBridge*1.5+5, 20,20).attr({"fill": "#33658a", "stroke": "none"}));
-  legendz.push(paper.text(540, heightBridge*1.5+15, "Bars in tension").attr({"font-size":20}));
-  legendz.push(paper.rect(690, heightBridge*1.5+5, 20,20).attr({"fill": "#495057", "stroke": "none"}));
-  legendz.push(paper.text(750, heightBridge*1.5+15, "No force").attr({"font-size":20}));
+
+  $("#bridge").append("<div id='legend' class='row'><div id = 'tension' class='col-sm-4'>Bar in Tension</div><div id='compression' class='col-sm-4'>Bar in Compression</div><div id = 'zero' class='col-sm-4'>No Force</div></div><div class='row'><div class = 'col-sm-12'><br></div></div>");
 }
