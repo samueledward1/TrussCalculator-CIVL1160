@@ -1,10 +1,24 @@
+class Force {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  getForceX() {
+    return this.x;
+  }
+
+  getForceY() {
+    return this.y;
+  }
+}
 
 function analyze() {
-  console.log("KUDA");
   forceType = [];
   edgeLength = [];
   elongMM = [];
   stress = [];
+
   // get form inputs
   height = $("#height").val();
   length = $("#length").val();
@@ -12,14 +26,12 @@ function analyze() {
   joints = $("#jointNum").val();
   degree = Math.atan(height / length);
   var text = "Angle of inclination = " + degree.toFixed(3) + " radian";
+
   //show output of angle
   $("#textangle").html(text);
 
-
   let cc = Math.cos(degree);
   let ss = Math.sin(degree);
-  //console.log("cc:", cc);
-  //console.log("ss: ", ss);
 
   let NUM_EDGES = 2 * joints - 3;
   //LOAD ON EACH JOINT
@@ -42,16 +54,11 @@ function analyze() {
 
     p.push(temp1);
     p.push(temp2);
-
   }
 
   porce = math.matrix(p);
 
-  //PORCE GAES
-  //console.log("PORCE");
-  //console.log(porce);
   var minusP = math.dotMultiply(porce, -1);
-  //console.log(z);
 
   var matrix = [];
 
@@ -87,17 +94,12 @@ function analyze() {
   matrix[2 * point - 1][NUM_EDGES + 2] = 1;   // RGY
 
   Matrix = math.matrix(matrix);
-  //console.log("MATRIX MEN");
-  //console.log(Matrix);
 
   inverseMatrix = math.inv(Matrix);
 
   solutionMatrix = math.multiply(inverseMatrix, minusP);
-  //console.log("SOLUTION!")
-  //console.log(solutionMatrix);
 
-  //NGAMBIL WARNA BOSQU
-
+  //set force value for each edge
   var temp = "";
   for (i = 0; i < NUM_EDGES + 3; ++i) {
     var check = solutionMatrix.subset(math.index(i, 0));
@@ -107,9 +109,9 @@ function analyze() {
   }
 
 
-  for (i = 0; i < NUM_EDGES + 3; ++i) {
-    console.log("Member " + (i + 1) + ": " + forceType[i]);
-  }
+  // for (i = 0; i < NUM_EDGES + 3; ++i) {
+  //   console.log("Member " + (i + 1) + ": " + forceType[i]);
+  // }
 
   //LENGTH, ELONGATION
   var result = 0, force = 0;
@@ -125,9 +127,6 @@ function analyze() {
     stress.push(force / area / 1000);
   }
 
-  //for (i = 0; i < NUM_EDGES + 3; ++i) {
-    //console.log("Length " + i + ": " + edgeLength[i]);
-    //console.log("Elongation " + i + ": " + elongMM[i]);}
 
   //create hide/show btn
 
@@ -136,6 +135,7 @@ function analyze() {
   $("#solution").css("background-color", "#f1f1f1");
   $("#solTable thead").html("");
   $("#solTable tbody").html("");
+  
   //table header
   $("#solTable thead").append("<th scope='col'>Member No.</th>");
   $("#solTable thead").append("<th scope='col'>Axial Force (kN)</th>");
