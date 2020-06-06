@@ -1,31 +1,69 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Truss Calculator</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>CIVL1160 Truss Calculator</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	 crossorigin="anonymous">
+	<link href="style.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
 
-    <div id=wrapper class="container">
-        <div id=header class="jumbotron">
-            <h1><marquee behavior=alternate><width=100% scrollamount=30>TRUSS CALCULATOR</marquee></h1>
-        </div>
+	<div id=wrapper class="container">
+		<div id=header class="jumbotron">
+			<h1 id="kinthil" color="#f1f1f1">
+				<span id="civl">CIVL1160 </span> TRUSS CALCULATOR
+			</h1>
+		</div>
+		<div class="container" id="forceVis">
+      <!-- <h3 id="professah">
+					<marquee behavior="alternate"> &#128536; PROfessah Thomas HU &#128536;</marquee>
+			</h3> -->
+			<div class="page-header col-12" id="forceVisHead">
 
-        <!-- input box-->
-        <div id=form_box class="col-12">
-            <br><h5>Input bridge dimension: </h5><br>
+				<h5>
+					Force Visualizer
+				</h5>
+
+			</div>
+			<!-- tempat gambar bridge-->
+			<div id="bridge" class="col-12">
+				<span id="analyze" class="text-muted">Fill all the properties to start</span>
+      </div>
+      <div id="solution" class="col-12 table-responsive">
+        <table class="table" id="solTable">
+          <thead>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div id="hideBtn" class="col-12">
+      </div>
+		</div>
+
+		<!-- input box-->
+
+    <div class="row">
+		<div id=form_box class="col-sm-12 col-md-6">
+      <div id="formTitle" class="col-12">
+			  <h5>Bridge Properties</h5>
+      </div>
             <form id="dimension" action="" class="col-12">
              <!-- height input-->
               <div class="form-group">
                 <div class="input-group" >
-                  <label for="height" class="col-3">Height </label>
-                  <input type="number" min=1 id= "height" class="col-7" />
-                  <div class="input-group-append">
-                    <div class="input-group-text">m</div>
+                  <label for="height" class="col-sm-12 col-md-3">Height </label>
+                  <input type="number" min=1 id= "height" class="col-sm-12 col-md-7" required value = 3 />
+                  <div class="col-sm-12 col-md-2 unit">
+                    m
                   </div>
                 </div>
               </div>
@@ -33,10 +71,10 @@
               <!-- length input-->
               <div class="form-group">
                 <div class="input-group">
-                  <label for="length" class="col-3">Length</label> 
-                  <input type="number" min=1 id="length" class="col-7" />
-                  <div class="input-group-append">
-                    <div class="input-group-text">m</div>
+                  <label for="length" class="col-sm-12 col-md-3">Length</label> 
+                  <input type="number" min=1 id="length" class="col-sm-12 col-md-7" required value=2 />
+                  <div class="col-sm-12 col-md-2 unit">
+                    m
                   </div>
                 </div>
               </div>
@@ -44,39 +82,50 @@
               <!-- Area input-->
               <div class="form-group">
                 <div class="input-group">
-                  <label for= "area" class="col-3">Area </label>
-                  <input type="number" min=1 id="area" class="col-7" value=1000 /> 
-                  <div class="input-group-append">
-                    <div class="input-group-text">mm<sup>2</sup></div> 
+                  <label for= "area" class="col-sm-12 col-md-3">Area </label>
+                  <input type="number" min=1 id="area" class="col-sm-12 col-md-7" value=1000 /> 
+                  <div class="col-sm-12 col-md-2 unit">
+                    mm<sup>2</sup>
                   </div>
                 </div>
               </div>
 
-              <div class="form-group">
+              <!-- #JOINTS -->
+              <div class="form-group" id= "jointnumCont">
                <div class="input-group">
-                 <label for= "jointNum" class="col-3"># of Joints</label>
-                 <input type="number" min=3 id="jointNum" class="col-7" /> 
+                 <label for= "jointNum" class="col-sm-12 col-md-3"># of Joints (3-26) </label>
+                 <input type="number" min=3 max=26 id="jointNum" class="col-sm-12 col-md-7" required value = 7 /> 
                </div>
               </div>
-              
-              <div class="form-group">
-               <div class="input-group">
-                 <label for= "angle" class="col-3">Angle</label>
-                 <input type="number" id="angle" class="col-7" /> 
-               </div>
-              </div>
-            </form>
-
-            <div class="col-12">
+              <br />
+              <hr id="result" />
+              <div class="col-12">
               <p id="textangle"></p>
             </div>
-            <div class="col-11 btn-group">
-              <button id="anlBtn" class="btn btn-success mb-2 col-6">Analyze</button>
-              <input type="Reset" class="btn btn-danger mb-2 col-6" name="Hapus" id="Hapus" Value="Erase Data">
+            <div class="col-12 btn-group" id="btngrp1">
+              <button id="anlBtn" class="btn btn-success mb-2 col-6">Create Truss Structure</button>
+              <input type="Reset" class="btn btn-danger mb-2 col-6" name="Hapus" id="Hapus" Value="Reset">
             </div>
+            </form>
+
+            
         </div>
-        <!-- tempat gambar bridge-->
-        <div id="bridge" class="col-12"></div>
+        <!-- jangan diapus-->
+        <div class="col-md-1">
+          <p></p>
+        </div>
+        <!-- jangan diapus-->
+        <div class="col-sm-12 col-md-5 col-md-offset-2" id="force_box">
+          <div class="col-12" id="forceTitle">
+              <h5>Forces</h5>
+          </div>
+          <form id="forces">
+            <!--elements made in JS-->
+            <h6>Enter # of Joints to start inputting forces</h6>
+          </form>
+        </div>
+      </div>
+
     </div>
 
 

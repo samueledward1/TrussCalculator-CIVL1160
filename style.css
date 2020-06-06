@@ -1,7 +1,82 @@
+body{
+  font-family: "Poppins", "Arial";
+  background-color: #f1f1f1;
+  padding-top: 20px;
+  transition:all 0.3s;
+}
+
+@keyframes kinthil {
+  0% {transform:scale(1);}
+  50% {transform:scale(5);}
+  100%{transform:scale(1);}
+}
+/* #professah{
+  animation-name:kinthil;
+  animation-duration:3s;
+  animation-iteration-count:infinite;
+} */
+#professah{
+  color: #f1f1f1;
+  transition:all 2s;
+}
+
+#professah:hover{
+  transform:scale(4);
+  color: red;
+}
+
+#civl{
+  color:rgb(22, 95, 124);
+}
+#analyze{
+  background-color:#f1f1f1!important;
+}
+
+
 #wrapper {
     margin: auto;
+    padding-left:50px;
+    padding-right:50px;
     height: auto;
     bottom:10px;
+}
+.jumbotron{
+  background-color:#A89C94FF !important;
+  border-bottom:10px solid rgb(117, 109, 103);
+}
+ .jumbotron h1{
+  color: #f1f1f1 !important;
+}
+
+input[type='number']{
+  background-color:#E7E6DC;
+  transition:all 0.3s;
+  color:grey;
+  border:none;
+  border-radius:5px;
+  border-bottom:0px solid  rgb(117, 109, 103);
+   box-shadow: 0 4px 15px rgba(0,0,0,0.19), 0 3px 4px rgba(0,0,0,0.23);
+}
+
+input[type='number']:focus{
+  background-color:#CCC3B6;
+  border:none;
+  border-radius:5px;
+  transition-timing-function: ease;
+  border-bottom:5px solid  rgb(117, 109, 103);
+  color:#f1f1f1;
+  outline:none;
+}
+
+input[type='number']:hover{
+  background-color:#CCC3B6;
+  border-radius:5px;
+  color:#f1f1f1;
+}
+
+input[type='number']:active{
+  box-shadow:none;
+  transition:all 0.2s;
 }
 
 
@@ -9,31 +84,150 @@
     font-size: 55px;
     line-height: 64px;
     text-align: center;
-    color: #000000;
 }
 
-#form_box {
-    border: 3px solid #000000;
-    border-radius: 10px;
+#form_box, #force_box{
+    border-radius: 2px;
+    margin-bottom:20px;
+}
+#dimension, #forces{
+  background-color:#f1f1f1;
+  padding:20px;
+  border-radius:0 0 20px 20px;
+  margin-bottom:10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+#dimension label{
+  text-align: center;
+  color: grey;
 }
 
 #form_box p {
-    padding-left: 30px;
     line-height: 26px;
     color: #000000;
 }
 
 #form_box form {
-    padding-left: 30px;
     line-height: 26px;
     color: #000000;
 }
-
-#form_box button {
-    margin-left: 30px;
+#formTitle, #forceTitle{
+  background-color:#A89C94FF;
+  text-align: center;
+  color: #F0F6F7FF;
+  border-radius:20px 20px 0px 0;
+  padding:10px;
+  padding-top:20px;
+  margin-top:10px;
+  border-bottom:5px solid  rgb(117, 109, 103);
 }
 
 
-#bridge {
-    border: 2px solid black;
+#bridge{
+  text-align: center;
+  /* border-radius:0 0 20px 20px; */
+  /* padding: 30px; */
+  background-color:#f1f1f1;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  border-bottom:5px solid  rgb(117, 109, 103);
+}
+
+#solution{
+  text-align: center;
+  background-color:#A89C94FF;
+   border-radius:0 0 20px 20px;
+  padding:10px;
+
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  
+}
+#hideBtn{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    border-radius:0 0 20px 20px;
+  background-color:#A89C94FF;
+  text-align: center;
+  color:#f1f1f1;
+  margin-bottom:20px;
+  transition: all 0.3s;
+}
+#hideBtn:hover{
+  cursor: pointer;
+  background-color:rgb(117, 109, 103);
+}
+
+#hideBtn:active{
+  box-shadow:none;
+}
+
+#bridge svg{
+    margin-bottom:20px;
+  text-align: center;
+  border-radius:0 0 20px 20px;
+  padding:20px;
+}
+
+#forceVis{
+  margin-top:20px;
+}
+#forceVis h3{
+  text-align:center;
+}
+#force_box{
+  border-radius: 5px;
+  margin-bottom:20px;
+  color:grey;
+}
+.unit{
+  margin-top:10px;
+  text-align: center;
+  color: grey;
+}
+#anlBtn{
+  background-color:#33658a;
+  transition:all 0.3s;
+  border-radius: 20px 0 0 20px;
+  border: none;
+}
+#anlBtn:hover{
+  background-color:rgb(63, 110, 131);
+}
+.btn-group button{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+#Hapus{
+  border-radius: 0 20px 20px 0px;
+  background-color:#a53860;
+  transition:all 0.3s;
+   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  border: none;
+}
+#Hapus2{
+  border-radius: 20px;
+  background-color:#a53860;
+  transition:all 0.3s;
+   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  border: none;
+}
+#Hapus:hover, #Hapus2:hover{
+ background-color:rgb(143, 47, 39);
+}
+#Hapus:active, #Hapus2:active{
+  box-shadow:none;
+}
+
+#forceVisHead{
+  border-radius:20px 20px 0 0;
+  background-color:#A89C94FF;
+  padding:10px;
+  color:#f1f1f1;
+  text-align:center;
+  padding-top:20px;
+  border-bottom:5px solid  rgb(117, 109, 103);
+}
+#textangle{
+  text-align:center;
+  color: grey;
+}
+hr{
+  border-top: 3px dotted rgb(117, 109, 103) !important;
 }
