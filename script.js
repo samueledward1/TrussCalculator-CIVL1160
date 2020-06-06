@@ -9,21 +9,6 @@ var stress = [];
 var height, length, area = 1000, joints, angle, degree;
 
 
-class Force {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-
-  getForceX() {
-    return this.x;
-  }
-
-  getForceY() {
-    return this.y;
-  }
-}
-
 function makeForce() {
   if ($("#jointNum").val() >= 3) {
     //create force inputs and dynamic elements
@@ -154,13 +139,40 @@ $(document).ready(function () {
   $("#length").change(function () {
     if ($("#length").val() < 0.01) {
       $("#length").val(0.01);
+      $("#length").css("background-color", "#a53860");
+      // $("#length").css("color", "#f1f1f1").delay(1000).queue(function(next){});css("background-color", "#E7E6DC").css("color", "grey");;
     }
   });
 
   $("#height").change(function () {
     if ($("#height").val() < 0.01) {
       $("#height").val(0.01);
+      $("#height").css("background-color", "#a53860");
+      $("#height").css("color", "#f1f1f1");
+    } else {
+      $("#height").css("background-color", "#E7E6DC");
+      $("#height").css("color", "grey");
     }
+  });
+
+  $(window).resize(function(e){
+    e.preventDefault();
+    inputForce = [];
+    var counter = 0;
+    var end = joints % 2 ? joints : joints - 1;
+    for (var i = 0; i < joints; ++i) {
+      if (i == 0 || i == end - 1) {
+        inputForce.push(0);
+      }
+      else {
+        inputForce.push($("#force" + counter).val());
+        counter++;
+      }
+    }
+
+    console.log("test");
+    analyze();
+    draw();
   });
 
 });

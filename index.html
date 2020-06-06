@@ -5,6 +5,8 @@
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
 	<title>CIVL1160 Truss Calculator</title>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
@@ -23,9 +25,7 @@
 			</h1>
 		</div>
 		<div class="container" id="forceVis">
-      <!-- <h3 id="professah">
-					<marquee behavior="alternate"> &#128536; PROfessah Thomas HU &#128536;</marquee>
-			</h3> -->
+    
 			<div class="page-header col-12" id="forceVisHead">
 
 				<h5>
@@ -37,6 +37,8 @@
 			<div id="bridge" class="col-12">
 				<span id="analyze" class="text-muted">Fill all the properties to start</span>
       </div>
+      
+      
       <div id="solution" class="col-12 table-responsive">
         <table class="table" id="solTable">
           <thead>
@@ -45,22 +47,26 @@
           </tbody>
         </table>
       </div>
+
       <div id="hideBtn" class="col-12">
       </div>
+      
 		</div>
 
 		<!-- input box-->
 
     <div class="row">
 		<div id=form_box class="col-sm-12 col-md-6">
+
       <div id="formTitle" class="col-12">
 			  <h5>Bridge Properties</h5>
       </div>
+
             <form id="dimension" action="" class="col-12">
              <!-- height input-->
               <div class="form-group">
                 <div class="input-group" >
-                  <label for="height" class="col-sm-12 col-md-3">Height </label>
+                  <label for="height" class="col-sm-12 col-md-3">Height (>0) </label>
                   <input type="number" min=1 id= "height" class="col-sm-12 col-md-7" required value = 3 />
                   <div class="col-sm-12 col-md-2 unit">
                     m
@@ -71,7 +77,7 @@
               <!-- length input-->
               <div class="form-group">
                 <div class="input-group">
-                  <label for="length" class="col-sm-12 col-md-3">Length</label> 
+                  <label for="length" class="col-sm-12 col-md-3">Length (>0)</label> 
                   <input type="number" min=1 id="length" class="col-sm-12 col-md-7" required value=2 />
                   <div class="col-sm-12 col-md-2 unit">
                     m
@@ -107,14 +113,16 @@
               <input type="Reset" class="btn btn-danger mb-2 col-6" name="Hapus" id="Hapus" Value="Reset">
             </div>
             </form>
-
+        
             
         </div>
+
         <!-- jangan diapus-->
         <div class="col-md-1">
           <p></p>
         </div>
         <!-- jangan diapus-->
+
         <div class="col-sm-12 col-md-5 col-md-offset-2" id="force_box">
           <div class="col-12" id="forceTitle">
               <h5>Forces</h5>
@@ -127,8 +135,6 @@
       </div>
 
     </div>
-
-
 
     <!--jQuery-->
     <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
