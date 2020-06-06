@@ -19,7 +19,7 @@ function draw() {
   var paper = Raphael("bridge"); //create paper
 
   //auto resizze
-  paper.setViewBox(0, 0, $("#bridge").width(), 650, true);
+  paper.setViewBox(0, 0, $("#bridge").width(), 450, true);
   var svg = document.querySelector("svg");
   svg.removeAttribute("width");
   svg.removeAttribute("height");
@@ -48,7 +48,7 @@ function draw() {
       jointz.push(paper.circle(xCoordUp + (lengthBar * Math.floor(i / 2)), 120, 10));
     }
     else {
-      jointz.push(paper.circle(xCoordDown + (lengthBar * Math.ceil(i / 2)), 530, 10));
+      jointz.push(paper.circle(xCoordDown + (lengthBar * Math.ceil(i / 2)), 330, 10));
     }
   }
 
@@ -120,11 +120,11 @@ function draw() {
   //add texts above jointz
 
   var arrowz = paper.set();
-  for (i = 1; i < jointz.length; i++) {
+  for (i = 0; i < jointz.length; i++) {
     var end = joints % 2 ? joints : joints - 1;
-    textz.push(paper.text(i%2 ? getCoord(jointz,i).x + 30 : getCoord(jointz, i).x - 20, i % 2 ? getCoord(jointz, i).y - 20 : getCoord(jointz, i).y + 20, String.fromCharCode(65 + i))); //draw joint name
-    if (i != end - 1) {
-      textz.push(paper.text(i%2 ? getCoord(jointz,i).x - 40 : getCoord(jointz, i).x + 40 , i % 2 ? getCoord(jointz, i).y - 40 : getCoord(jointz, i).y + 40, inputForce[i] + " kN")); // draw force value
+    textz.push(paper.text(getCoord(jointz, i).x - 20, i % 2 ? getCoord(jointz, i).y - 20 : getCoord(jointz, i).y + 20, String.fromCharCode(65 + i))); //draw joint name
+    if (i != end - 1 && i != 0) {
+      textz.push(paper.text(getCoord(jointz,i).x - 35 , i % 2 ? getCoord(jointz, i).y - 40 : getCoord(jointz, i).y + 40, inputForce[i] + " kN")); // draw force value
     }
     //draw joint arrows
     var elongation = (inputForce[i] > 140 || inputForce[i] < -140) ? 140 : inputForce[i];
@@ -152,7 +152,7 @@ function draw() {
       }
     }
     else {
-      if (i == end - 1) {
+      if (i == end - 1 || i == 0) {
         continue;
       }
       if (inputForce[i] == 0) {
@@ -188,7 +188,7 @@ function draw() {
       jointz.push(paper.circle(xCoordUp + (lengthBar * Math.floor(i / 2)), 120, 10));
     }
     else {
-      jointz.push(paper.circle(xCoordDown + (lengthBar * Math.ceil(i / 2)), 530, 10));
+      jointz.push(paper.circle(xCoordDown + (lengthBar * Math.ceil(i / 2)), 330, 10));
     }
   }
 
